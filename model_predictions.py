@@ -36,16 +36,7 @@ class ModelPredictions(Data):
 
 
     def Display(self):
-        st.title('Model predictions')
-
-        # ''' Get the necessary dataframe created in "get_tweets.py" file and get the tweets from it to pass to the function below. Convert the
-        #     tweets to a list and the "Cleaned Tweets" column was added in the "preprocess_tweets.py" file. '''
-        # df = st.session_state.dataframe_of_tweets
-        # list_of_new_tweets = df['Cleaned Tweets'].tolist()
-
         st.session_state.m_model_class.Predict()
-
-        # st.session_state.m_model_class.PredictWithMean()
 
     
     

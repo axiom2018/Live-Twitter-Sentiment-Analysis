@@ -25,9 +25,6 @@ class UnsupervisedLearning(Data):
         independent than supervised learning, which **requires** labeled data so the model can have data that already makes 
         sense. '''
 
-        self.m_final_details = ''' Clustering was mentioned in the above text, and it's a critical part of unsupervised learning. 
-        **_We'll go over clustering in the next page!_** '''
-
 
     
     def Display(self):
@@ -38,10 +35,6 @@ class UnsupervisedLearning(Data):
         st.write('')
         st.write('')
         st.write(self.m_details)
-
-        st.write('')
-        st.write('')
-        st.write(self.m_final_details)
 
         st.session_state.can_change_page = True
 

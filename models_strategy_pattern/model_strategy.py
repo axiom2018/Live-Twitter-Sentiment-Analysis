@@ -12,9 +12,9 @@ of models that will be later added.
 '''
 
 class ModelStrategy:
-    def __init__(self, type_of_class) -> None:
+    def __init__(self, type_of_class, model_name) -> None:
         self.m_type = type_of_class
-        self.m_model_name = ''
+        self.m_model_name = model_name
         self.m_model_details = ''' '''
 
     

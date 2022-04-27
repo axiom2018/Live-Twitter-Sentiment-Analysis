@@ -21,13 +21,11 @@ from clustering_strategy_pattern.k_means import SKL_KMeans
 
 class St_AllMpnetBaseV2(ModelStrategy):
     def __init__(self):
-        super().__init__(ModelTypes.Embedding)
+        super().__init__(ModelTypes.Embedding, "All Mpnet Base V2")
 
         # self.m_model = None
 
         self.m_num_for_unlabeled_tweets = -1
-
-        self.m_model_name = "All Mpnet Base V2"
         
         self.m_model_details = ''' This model is one of the few pretrained models provided by sentence bert (or sbert).
         All of the models for sentence bert have been assessed for how well they perform and this one inparticular has
@@ -69,7 +67,9 @@ class St_AllMpnetBaseV2(ModelStrategy):
 
               # self, example_tweets_list, new_tweets_from_twitter_list=None, num_of_tweets_to_display=5, values_in_each_tweet=10
     def Predict(self, num_of_tweets_to_display=5, values_in_each_tweet=10):
-        print('Start of the Predict function.')
+        st.title(f'{self.m_model_name} predictions.')
+        self.ApplySpacingOnScreen(3)
+        
         # Example tweets were created in clustering.py, will be needed to get total tweets.
         example_tweets_list = st.session_state.m_example_tweets
 
@@ -82,7 +82,6 @@ class St_AllMpnetBaseV2(ModelStrategy):
             new_tweets_from_twitter_list = df['Cleaned Tweets'].tolist()
 
 
-        print('total_tweets variable being initialized.')
         total_tweets = None
 
         if new_tweets_from_twitter_list is None:
@@ -93,7 +92,6 @@ class St_AllMpnetBaseV2(ModelStrategy):
             total_tweets = example_tweets_list + new_tweets_from_twitter_list
 
 
-        print('EmbedTweets function will be called.')
         # Get the tweets embedded by the model loaded earlier and display them.
         self.m_embeddings_manager.EmbedTweets(total_tweets)
         self.m_embeddings_manager.DisplayEmbeddedTweets(num_of_tweets_to_display, values_in_each_tweet)

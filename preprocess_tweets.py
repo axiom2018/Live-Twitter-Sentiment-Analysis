@@ -83,16 +83,7 @@ class PreprocessTweets(Data):
 
 
     def ModelCompatibilityCheck(self):
-        model_class = st.session_state.m_model_class
-
-        if self.ModelTypeCheck(model_class, self.__class__.__name__, ModelTypes.Embedding, True):
-            return True
-
-        # When the page is going to be skipped, increment variable that controls which class is displayed to get to the proper next class.
-        st.session_state.list_index += 1
-        print(f'Session state value in preprocess_tweets.py: {st.session_state.list_index}')
-
-        return False
+        return True
 
 
     
