@@ -3,6 +3,7 @@ import pandas as pd
 from models_strategy_pattern.model_types import ModelTypes
 from models_strategy_pattern.model_strategy import ModelStrategy
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+from Etc.Spacing import Spacing
 
 ''' 
             Vader
@@ -12,10 +13,9 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 '''
 
-class Vader(ModelStrategy):
+class Vader(ModelStrategy, Spacing):
     def __init__(self) -> None:
         super().__init__(ModelTypes.SimpleLibrary, "Vader")
-        self.m_vader_model = None
 
         self.m_model_details = ''' Vader is a rule based sentiment analysis model that is **_specifically_** tuned for social media.
         It give scores regarding 3 kinds of sentiment for each given string. Those are positive, neutral, and negative. Very convenient 
@@ -26,7 +26,9 @@ class Vader(ModelStrategy):
 
     @st.cache(allow_output_mutation=True)
     def Load(self):
-        self.m_vader_model = SentimentIntensityAnalyzer()
+        if 'm_model' not in st.session_state:
+            st.session_state.m_model = SentimentIntensityAnalyzer()
+        # self.m_vader_model = SentimentIntensityAnalyzer()
 
 
     
@@ -64,9 +66,10 @@ class Vader(ModelStrategy):
         labels = ['negative', 'neutral', 'positive']
         
         # Now begin predictions
-        for i in range(10):
+        for i in range(len_total_tweets):
             # Get the scores of the current tweet at index i. This will return a dictionary.
-            sentiment_of_tweet = self.m_vader_model.polarity_scores(total_tweets[i])
+            # sentiment_of_tweet = self.m_vader_model.polarity_scores(total_tweets[i])
+            sentiment_of_tweet = st.session_state.m_model.polarity_scores(total_tweets[i])
 
             # With that dictionary, it will always be in the form "'neg', 'neu', 'pos'". That's
             # good because it's possible to extract all the sentiment floating point scores and

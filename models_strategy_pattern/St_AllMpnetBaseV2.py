@@ -1,10 +1,9 @@
 import streamlit as st
 from Etc.Embeddings import Embeddings
 from Etc.ScatterPlot import ScatterPlot
-
+from Etc.Spacing import Spacing
 from models_strategy_pattern.model_strategy import ModelStrategy
 from models_strategy_pattern.model_types import ModelTypes
-
 from sentence_transformers import SentenceTransformer
 from clustering_strategy_pattern.k_means import SKL_KMeans
 
@@ -19,13 +18,9 @@ from clustering_strategy_pattern.k_means import SKL_KMeans
 
 '''
 
-class St_AllMpnetBaseV2(ModelStrategy):
+class St_AllMpnetBaseV2(ModelStrategy, Spacing):
     def __init__(self):
         super().__init__(ModelTypes.Embedding, "All Mpnet Base V2")
-
-        # self.m_model = None
-
-        self.m_num_for_unlabeled_tweets = -1
         
         self.m_model_details = ''' This model is one of the few pretrained models provided by sentence bert (or sbert).
         All of the models for sentence bert have been assessed for how well they perform and this one inparticular has
@@ -59,13 +54,11 @@ class St_AllMpnetBaseV2(ModelStrategy):
 
     @st.cache(allow_output_mutation=True)
     def Load(self):
-        # self.m_model = SentenceTransformer('all-mpnet-base-v2')
         if 'm_model' not in st.session_state:
             st.session_state.m_model = SentenceTransformer('all-mpnet-base-v2')
             
 
 
-              # self, example_tweets_list, new_tweets_from_twitter_list=None, num_of_tweets_to_display=5, values_in_each_tweet=10
     def Predict(self, num_of_tweets_to_display=5, values_in_each_tweet=10):
         st.title(f'{self.m_model_name} predictions.')
         self.ApplySpacingOnScreen(3)

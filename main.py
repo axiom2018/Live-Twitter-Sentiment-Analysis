@@ -12,11 +12,11 @@ from unsupervised_learning import UnsupervisedLearning
 from streamlit import legacy_caching
 from streamlit_autorefresh import st_autorefresh
 
-
+# Clears the cache and re-runs the code. Helps for refreshing properly.
 legacy_caching.clear_cache()
 
 
-# A list will be made of class objects so the user will navigate step by step to the end.
+# A list will be made of class objects so the user will navigate step by step to the end. This value will keep track of what class to display.
 if 'list_index' not in st.session_state:
     st.session_state.list_index = 0
 
@@ -74,7 +74,7 @@ _ ,next = st.columns([10, 1])
 place = st.empty()
 
 
-
+# If this specific class IS the last class, only worry about displaying, there's no need to worry about a "next" button.
 if st.session_state.list_of_classes[st.session_state.list_index].IsLastClass():
     st.session_state.list_of_classes[st.session_state.list_index].Display()
 else:
@@ -82,6 +82,7 @@ else:
     if place.button('Next') and st.session_state.can_change_page is True:
         st.session_state.list_index += 1
 
+        # If the last class is reached, remove the next button.
         if st.session_state.list_index >= len(st.session_state.list_of_classes):
             place.empty()
 

@@ -1,13 +1,7 @@
-from turtle import distance
 import streamlit as st
 import umap
 import pandas as pd
-import matplotlib.pyplot as plt
-import numpy as np
-import math
-
-from sklearn.cluster import KMeans
-from Etc.ScatterPlot import ScatterPlot
+from Etc.Spacing import Spacing
 
 
 
@@ -31,22 +25,19 @@ only key issue to keep in mind because this class will reference whatever is in 
 '''
 
 
-class Embeddings:
+class Embeddings(Spacing):
     ''' Constructor variables:
 
         m_model - Save the model in the session_state everytime DisplayTweets is called.
 
         m_embedded_tweets - Save the vector embeddings of each tweet.
 
-        m_example_tweets_given_bool - This important boolean will tell if only the example/dummy tweets are present. If that's
-            the case the process of plotting will be handled a bit differently, more simple.
-
-
+        m_list_of_tweets_to_predict - The list of tweets that the EmbedTweets function will take and will be used
+            to create a dataframe.
 
         m_max_length_of_tweets - When embedding occurs with the EmbedTweets, this will save the size because normally
             DisplayTweetEmbeddings will be run and then ShowPlotOfEmbeddedTweets right after. The last mentioned function
             will need the length to make embeddings.
-
 
 
         m_umap_description - Umap is a library used to get larger embeddings to a specified dimension, in this case, 2d.
@@ -55,16 +46,15 @@ class Embeddings:
         m_tweet_and_points_description - This is describing a new dataframe with tweets and coordinates.
 
         m_k_means_description - Describing how k means works for this task.
-    
-    '''
+
+        m_clustering_description - Explain how clustering will work in the project.
+
+        m_tweets_from_twitter_tested - When tweets get pulled from Twitter, give this extra note of detail to the user. '''
     def __init__(self) -> None:
         self.m_model = None
         self.m_embedded_tweets = None
-        self.m_example_tweets_given_bool = None
         self.m_list_of_tweets_to_predict = None
-        self.m_plot_manager = ScatterPlot()
         self.m_max_length_of_tweets = 0
-
 
         self.m_umap_description = ''' Umap is used for dimension reduction. Some clustering algorithms can't handle vectors
         of really high dimensions and models typically put sentence/word embeddings **in** high dimensions. For example
@@ -89,17 +79,17 @@ class Embeddings:
     
 
 
-    def EmbedTweets(self, list_of_tweets, example_tweets_given_bool=False):
-        # Most important first step is to embed the tweets, the model will do that.
+    ''' Most important first step is to embed the tweets. Save the model, who will take care of just that purpose, and save
+        every other relevant variable needed for the process.'''
+    def EmbedTweets(self, list_of_tweets):
         self.m_model = st.session_state.m_model 
-        self.m_list_of_tweets_to_predict = list_of_tweets
         self.m_embedded_tweets = self.m_model.encode(list_of_tweets)
+        self.m_list_of_tweets_to_predict = list_of_tweets
         self.m_max_length_of_tweets = len(self.m_embedded_tweets)
 
-        self.m_example_tweets_given_bool = example_tweets_given_bool
 
 
-
+    # To share as much detail as possible for the user.
     def DisplayEmbeddedTweets(self, num_of_tweets_to_display=5, values_in_each_tweet=10):
         st.write(f'1) Length of each tweet embedding: {len(self.m_embedded_tweets[0])}')
         st.write('')
@@ -110,7 +100,7 @@ class Embeddings:
             st.write('')
 
 
-
+    # Embedded tweets normally are ridiculously long in length. Reducing them will help with the clustering later so get that done here. 
     def GetUmapReducedDimension(self):
         # Get some space so visuals on screen aren't so clustered up together.
         self.ApplySpacingOnScreen(4)
@@ -124,7 +114,6 @@ class Embeddings:
         st.write('')
         st.write('')
         st.write(umap_obj.embedding_)
-
 
 
         # Get some space so visuals on screen aren't so clustered up together.
@@ -142,27 +131,6 @@ class Embeddings:
         return umap_obj, df
 
 
-
-
-
-
-
-
-    '''
-    
-            Smaller helper functions.
-
-    '''
-    
-    def GetEmbeddedTweets(self):
-        return self.m_embedded_tweets
-
-
-    # Help give spaces between portions of text.
-    def ApplySpacingOnScreen(self, amount_of_spaces):
-        for i in range(amount_of_spaces):
-            st.write('')
-    
 
     ''' This will be for creating the new dataframe that will match tweets with 2d points. First create the new dataframe with the given
         coordinates and make the columns x and y. Make a new column and give that the tweets. The x and y column and put first in front

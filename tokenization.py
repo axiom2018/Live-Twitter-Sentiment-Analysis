@@ -1,12 +1,5 @@
 import streamlit as st
 from data import Data
-# from tensorflow.keras.preprocessing.text import Tokenizer
-# from tensorflow.python.keras.preprocessing.sequence import pad_sequences
-
-from keras.preprocessing.text import Tokenizer
-from keras.preprocessing.sequence import pad_sequences
-from models_strategy_pattern.model_types import ModelTypes
-
 
 ''' 
 
@@ -19,8 +12,6 @@ With that said this will handle tokenization which will convert words to numbers
 
 class Tokenization(Data):
     def __init__(self):
-        super().__init__()
-        
         # Message for the specific page.
         self.m_details = ''' Models aren't advanced enough yet to understand raw text. So tokenization will
         help convert the words to numbers. And this method will in fact give a relationship to words so 
@@ -88,13 +79,9 @@ class Tokenization(Data):
 
 
     def ModelCompatibilityCheck(self):
-        # model_class = st.session_state.m_model_class
-
-        # if self.ModelTypeCheck(model_class, self.__class__.__name__, ModelTypes.SimpleLibrary, True):
-        #     return True
-
         # When the page is going to be skipped, increment variable that controls which class is displayed to get to the proper next class.
         st.session_state.list_index += 1
-        print(f'NO check here. Will always return false. Session state value in tokenization.py: {st.session_state.list_index}')
 
+        # No check here, will always return false for now.
+        print(f'{self.__class__.__name__} incrementing session state value to {st.session_state.list_index}.')
         return False

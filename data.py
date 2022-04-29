@@ -35,12 +35,6 @@ class Data:
     def __init__(self):
         self.m_details = ''' '''
 
-        # self.m_key_numbers_as_str = []
-        # self.m_range_start = 0
-        # self.m_range_end = 1000
-
-        # self.m_display_page_info = True
-
 
     def Display(self):
         pass

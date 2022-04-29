@@ -12,9 +12,13 @@ of models that will be later added.
 '''
 
 class ModelStrategy:
-    def __init__(self, type_of_class, model_name) -> None:
-        self.m_type = type_of_class
+    def __init__(self, type_of_model, model_name) -> None:
+        # Checking what the type of model is for each class in the list in main.py is vital. It'll check if a particular model belongs in that class.
+        self.m_type = type_of_model
+
         self.m_model_name = model_name
+
+        # A quick explanation on a model will help the user gain understanding.
         self.m_model_details = ''' '''
 
     
@@ -24,9 +28,10 @@ class ModelStrategy:
             All functions below are for derived classes to override.
 
 
+            1) Load - Of course loading the model.
 
 
-            4) Predict - 
+            2) Predict - 
 
                 a) example_tweets_list - This is the main list that's provided for 2 reasons. One is to get the example plot up and displaying of course.
                     The other is to help the tweets from twitter have a real "foothold" regarding other tweets that are positive, neutral, or negative.
@@ -44,14 +49,6 @@ class ModelStrategy:
         pass
 
 
-    def EmbedTweets(self):
-        pass
-    
-
-    def DisplayTweetEmbeddings(self):
-        pass
-
-
     def Predict(self, example_tweets_list, new_tweets_from_twitter_list=None, num_of_tweets_to_display=5, values_in_each_tweet=10):
         pass
 
@@ -65,20 +62,11 @@ class ModelStrategy:
     
     '''
 
+    # Used in data.py to check proper type of a model, seeing it the current page is one it belongs on.
     def GetType(self):
         return self.m_type
 
 
-    # Referenced in model_selection.py
+    # When selecting a model in model_selection.py, this function is used to display the name.
     def GetName(self):
         return self.m_model_name
-
-
-    def GetModelType(self):
-        return self.m_type
-
-
-    # Help give spaces between portions of text and such on screen.
-    def ApplySpacingOnScreen(self, amount_of_spaces):
-        for i in range(amount_of_spaces):
-            st.write('')

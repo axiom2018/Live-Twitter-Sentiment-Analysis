@@ -1,11 +1,8 @@
 import streamlit as st
 from data import Data
 import pandas as pd
-
 from models_strategy_pattern.model_types import ModelTypes
 
-# from clustering_algorithm_strategy_pattern.k_means_clustering import KMeansClustering
-# from clustering_strategy_pattern.k_means import SKL_KMeans
 
 ''' 
 
@@ -19,7 +16,6 @@ clustering algorithms would be great.
 # next_class added for chain of responsibility pattern.
 class Clustering(Data):
     def __init__(self):
-        
         self.m_details = ''' Since this project is an unsupervised machine learning problem, it'll be good to cluster similar 
         tweets together. Several clustering algorithms will be use such as the famous k means clustering algorithm. Also, example 
         or dummy tweets will be used in order to demonstrate the clustering since no tweets have been pulled yet. There will be 3 
@@ -121,33 +117,14 @@ class Clustering(Data):
         if 'm_example_tweets' not in st.session_state:
             st.session_state.m_example_tweets = self.m_all_example_tweets
 
-
-
         # Save the labels for use in models
         if 'm_labels' not in st.session_state:
             st.session_state.m_labels = self.m_labels
 
-        # All embeddings will be added to the dataframe once collected. Have a list ready now.
-        # self.m_all_example_tweet_embeddings = []
-
-        # Vital step is to initialize all the clustering classes. Allow the user to see different clusting algorithms at work.
-        # self.m_clustering_algorithms = [KMeansClustering()]
-
 
 
     def Display(self):
-        # Get Model class for checking if the class can be processed here.
-        # model_class = st.session_state.m_model_class
-
-        # self.ModelTypeCheck(model_class, self.__class__.__name__, ModelTypes.Embedding)
-
-        # if not self.ModelTypeCheck(model_class, ModelTypes.Embedding):
-        #     model_type = model_class.GetType()
-        #     print(f"{self.__class__.__name__} doesn't use type {model_type}. Going to next class!")
-        #     self.m_next_class.Display(model_class)
-
         st.title('Clustering')
-        # st.write(f'Next class is {self.m_next_class}')
 
         st.write('')
         st.write('')

@@ -14,9 +14,7 @@ centered around unsupervised learning.
 '''
 
 class UnsupervisedLearning(Data):
-    def __init__(self):
-        super().__init__()
-        
+    def __init__(self):        
         self.m_image = Image.open('images/unsupervised_machine_learning.png')
 
         self.m_details = ''' What is unsupervised learning? This form of machine learning uses unlabeled data and tries to

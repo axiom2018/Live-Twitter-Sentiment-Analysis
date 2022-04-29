@@ -20,7 +20,6 @@ A lot of keys (strings basically) have to be known in order to be able to pull t
 # next_class added for chain of responsibility pattern.
 class GetTweets(Data):
     def __init__(self):
-        
         # Also called consumer key.
         self.m_api_key = '8qpz7Nw6SX6MYmUYMvGQJXz7O'
 

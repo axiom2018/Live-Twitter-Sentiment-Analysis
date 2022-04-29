@@ -1,6 +1,5 @@
 import streamlit as st
 from data import Data
-
 from models_strategy_pattern.model_types import ModelTypes
 
 ''' 
@@ -15,8 +14,7 @@ as well.
 
 # next_class added for chain of responsibility pattern.
 class GetTweetEmbeddings(Data):
-    def __init__(self):
-        
+    def __init__(self):        
         self.m_details = ''' To understand sentence embeddings, it's worth going over **_word_** embeddings as well. A word
         embedding is basically a vector or numerical representation of a single word and is able to identify the syntaxes.
         Some famous word embedding libraries are Word2Vec, and GloVe, but there's a few more out there. Sentence embeddings
@@ -58,16 +56,12 @@ class GetTweetEmbeddings(Data):
 
 
     def ModelCompatibilityCheck(self):
-        print('get_tweet_embeddings.py pre check ModelCompatibilityCheck.')
         model_class = st.session_state.m_model_class
 
         if self.ModelTypeCheck(model_class, self.__class__.__name__, ModelTypes.Embedding, True):
             return True
 
-        print('get_tweet_embeddings.py post check ModelCompatibilityCheck.')
-
         # When the page is going to be skipped, increment variable that controls which class is displayed to get to the proper next class.
         st.session_state.list_index += 1
-        print(f'Session state value in get_tweet_embeddings.py: {st.session_state.list_index}')
-
+        
         return False

@@ -4,8 +4,6 @@ from data import Data
 import nltk
 from nltk.corpus import stopwords
 
-from models_strategy_pattern.model_types import ModelTypes
-
 
 ''' 
 
@@ -18,7 +16,6 @@ Last step was GATHERING tweets, this step will be used to preprocess them.
 # next_class added for chain of responsibility pattern.
 class PreprocessTweets(Data):
     def __init__(self):
-
         self.m_details = ''' Preprocessing is a necessary step when dealing with **any** sentiment analysis task and depending on the 
         task itself, there are a variety of steps. For example, in Twitter it's a lot more common to see "@" mentions of other usernames than on
         Facebook. Also the hashtags, retweets, links and such must be handled in this social media platform. '''
@@ -79,12 +76,6 @@ class PreprocessTweets(Data):
 
         # Tweets are preprocessed, now the user can proceed to the next page.
         st.session_state.can_change_page = True
-
-
-
-    def ModelCompatibilityCheck(self):
-        return True
-
 
     
     '''
