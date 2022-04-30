@@ -14,7 +14,7 @@ from clustering_strategy_pattern.k_means import SKL_KMeans
             St_AllMpnetBaseV2
 
     This is a model that the sentence transformers framework utilizes, makes the process of getting sentence 
-    embeddings
+    embeddings.
 
 '''
 
@@ -46,6 +46,7 @@ class St_AllMpnetBaseV2(ModelStrategy, Spacing):
         with a **_NEW_** tweet pulled straight from Twitter, get it's x and y coordinates and see what group is closer to it and voila!
         **_This may or may not produce different results from standard clustering algorithms like k means, but it's worth a shot!_** '''
         
+        # This model will need embedding management, so let the class handle that.
         self.m_embeddings_manager = Embeddings()
         self.m_clustering_algorithm = SKL_KMeans(1234)
         self.m_plot_manager = ScatterPlot()

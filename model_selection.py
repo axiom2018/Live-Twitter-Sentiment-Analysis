@@ -5,6 +5,7 @@ from data import Data
 # from models_strategy_pattern.bert_base_uncased_model import BertBaseUncasedModel
 from models_strategy_pattern.St_AllMpnetBaseV2 import St_AllMpnetBaseV2
 from models_strategy_pattern.Vader import Vader
+from models_strategy_pattern.FineTunedBertweet import FineTunedBertweet
 
 
 ''' 
@@ -37,7 +38,8 @@ class ModelSelection(Data):
 
         # The types of models to choose from.
         self.m_model_types = ['SentenceTransformer (all-mpnet-base-v2)',
-                              'Vader']
+                              'Vader',
+                              'Fine tuned Bertweet']
 
         # Holds the specific chosen model.
         self.m_model_class = None
@@ -82,6 +84,8 @@ class ModelSelection(Data):
                 self.m_model_class = St_AllMpnetBaseV2()
             elif type_of_model == self.m_model_types[1]:
                 self.m_model_class = Vader()
+            elif type_of_model == self.m_model_types[2]:
+                self.m_model_class = FineTunedBertweet()
 
             # Use the spinner because no matter what, loading will take some time.
             with st.spinner(f'Loading {self.m_model_class.GetName()} into memory....'):

@@ -49,7 +49,7 @@ class ModelStrategy:
         pass
 
 
-    def Predict(self, example_tweets_list, new_tweets_from_twitter_list=None, num_of_tweets_to_display=5, values_in_each_tweet=10):
+    def Predict(self, num_of_tweets_to_display=5, values_in_each_tweet=10):
         pass
 
 
