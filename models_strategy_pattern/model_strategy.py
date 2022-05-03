@@ -1,5 +1,3 @@
-import streamlit as st
-from models_strategy_pattern.model_types import ModelTypes
 
 
 ''' 
@@ -33,15 +31,9 @@ class ModelStrategy:
 
             2) Predict - 
 
-                a) example_tweets_list - This is the main list that's provided for 2 reasons. One is to get the example plot up and displaying of course.
-                    The other is to help the tweets from twitter have a real "foothold" regarding other tweets that are positive, neutral, or negative.
-                    Assuming that no simplier library like Vader is selected at the beginning of the project.
+                a) num_of_tweets_to_display - There will be a lot of embeddings, how many to display to the user.
 
-                b) new_tweets_from_twitter_list - All the tweets pulled from Twitter in the "get_tweets.py" file.
-
-                c) num_of_tweets_to_display - There will be a lot of embeddings, how many to display to the user.
-
-                d) values_in_each_tweets - The embeddings are ridiculously long. How many values to show to the user?
+                b) values_in_each_tweets - The embeddings are ridiculously long. How many values to show to the user?
     
     '''
 

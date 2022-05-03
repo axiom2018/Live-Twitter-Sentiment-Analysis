@@ -1,10 +1,3 @@
-import abc
-import streamlit as st
-import random
-
-from models_strategy_pattern.model_strategy import ModelStrategy
-from models_strategy_pattern.model_types import ModelTypes
-
 '''
             Data 
 
@@ -19,6 +12,15 @@ any class. The interface below is extremely simple.
 
         2) Display - Used for streamlit, this function will call functions such as st.write() and more.
             Streamlit is mainly for show and this ensures things will be shown.
+
+        3) ModelCompatibilityCheck - Check if the model class is compatible or "necessary" to be used on a
+            certain page. For example, the Vader interface doesn't require embeddings at all. So the page
+            "get_tweet_embeddings" is unnecessary for it, and it just skips it.
+
+        4) IsLastClass - Marking the last class so the next button will no longer display.
+
+        5) ModelTypeCheck - This is the deciding function called within ModelCompatibilityCheck in the 
+            subclasses.
 
     
     Variables:
@@ -74,19 +76,4 @@ class Data:
         if show_steps is True:
             print('---End model type check---\n\n')
 
-
         return True
-
-
-    
-    # def CheckCompatibility(self, model, type_allowed_for_this_class):
-    #     if model is None:
-    #         return True
-        
-    #     model_type = model.GetType()
-
-    #     if model_type == type_allowed_for_this_class:
-    #         return True
-        
-
-    #     return False

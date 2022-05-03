@@ -12,9 +12,10 @@ as well.
     
 '''
 
-# next_class added for chain of responsibility pattern.
 class GetTweetEmbeddings(Data):
-    def __init__(self):        
+    def __init__(self):   
+        super().__init__()
+             
         self.m_details = ''' To understand sentence embeddings, it's worth going over **_word_** embeddings as well. A word
         embedding is basically a vector or numerical representation of a single word and is able to identify the syntaxes.
         Some famous word embedding libraries are Word2Vec, and GloVe, but there's a few more out there. Sentence embeddings

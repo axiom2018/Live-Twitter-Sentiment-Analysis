@@ -3,8 +3,6 @@ import streamlit as st
 from data import Data
 import tweepy
 
-
-
 ''' 
 
             GetTweets
@@ -17,9 +15,10 @@ A lot of keys (strings basically) have to be known in order to be able to pull t
     
 '''
 
-# next_class added for chain of responsibility pattern.
 class GetTweets(Data):
     def __init__(self):
+        super().__init__()
+        
         # Also called consumer key.
         self.m_api_key = '8qpz7Nw6SX6MYmUYMvGQJXz7O'
 
@@ -109,10 +108,8 @@ class GetTweets(Data):
 
     
 
-    ''' As the name suggests, this functon will get all tweets received in the
-        display function and just toss them into a dataframe. This is done because
-        a lot of operations are normally used on dataframes so there's a strong
-        familarity there. '''
+    ''' As the name suggests, this functon will get all tweets received in the display function and just toss them into a dataframe. 
+        This is done because a lot of operations are normally used on dataframes so there's a strong familarity there. '''
     def CreateDataframeFromTweets(self):
         if 'dataframe_of_tweets' not in st.session_state:
             # Make code more readable by getting the tweets saved in streamlit

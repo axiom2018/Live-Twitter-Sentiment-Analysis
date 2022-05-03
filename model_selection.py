@@ -1,8 +1,5 @@
 import streamlit as st
 from data import Data
-# from models_strategy_pattern.custom_twitter_model import CustomTwitterModel
-# from models_strategy_pattern.bert_model import BertModel
-# from models_strategy_pattern.bert_base_uncased_model import BertBaseUncasedModel
 from models_strategy_pattern.St_AllMpnetBaseV2 import St_AllMpnetBaseV2
 from models_strategy_pattern.Vader import Vader
 from models_strategy_pattern.FineTunedBertweet import FineTunedBertweet
@@ -24,6 +21,7 @@ for reuse.
 
 class ModelSelection(Data):
     def __init__(self):
+        super().__init__()
 
         ''' Variables:
         
@@ -77,9 +75,7 @@ class ModelSelection(Data):
             st.write(f'Type of model chosen is {type_of_model}')
 
             ''' Now save the model here. The interface is already set in model_strategy.py so any functions that
-                are called with this object from here on in only need to adhere to those interface function names.
-                
-                Implement factory pattern later here. '''
+                are called with this object from here on in only need to adhere to those interface function names. '''
             if type_of_model == self.m_model_types[0]:
                 self.m_model_class = St_AllMpnetBaseV2()
             elif type_of_model == self.m_model_types[1]:

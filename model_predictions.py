@@ -1,6 +1,5 @@
 import streamlit as st
 from data import Data
-# from models_strategy_pattern.custom_twitter_model import CustomTwitterModel
 
 
 ''' 
@@ -16,6 +15,7 @@ word embedding dimensions are finely tuned.
 # next_class added for chain of responsibility pattern.
 class ModelPredictions(Data):
     def __init__(self):
+        super().__init__()
         
         self.m_details = ''
 

@@ -21,6 +21,13 @@ class Vader(ModelStrategy, Spacing):
         It give scores regarding 3 kinds of sentiment for each given string. Those are positive, neutral, and negative. Very convenient 
         that those are the sentiment labels this project of course uses, which is why it's used here. Vader is incredibly simple to
         use in code as well. '''
+
+        self.m_last_column = 'Vader polarity score (in "neg, neu, pos" order)'
+
+        self.m_results_message = f''' Below are dataframes of the of the tweets that the Vader model has identified as positive, neutral,
+        or negative. Scores are given in the last column called {self.m_last_column} as floating point values. They are in **reverse**
+        order which is negative, neutral, and positive. There is also a compound value in the list of negative, neutral, and positive,
+        but this is discarded as it is not needed. '''
     
 
 
@@ -28,7 +35,6 @@ class Vader(ModelStrategy, Spacing):
     def Load(self):
         if 'm_model' not in st.session_state:
             st.session_state.m_model = SentimentIntensityAnalyzer()
-        # self.m_vader_model = SentimentIntensityAnalyzer()
 
 
     
@@ -88,11 +94,15 @@ class Vader(ModelStrategy, Spacing):
             highest_value_index = values_list.index(highest_value)
             label = labels[highest_value_index]
 
+            # Convert list of integers to string, simply for getting space inbetween.
+            space_list = [(str(number) + ' ') for number in values_list]
+
+
             # Get the dictionary ready, this will be data made of the current tweet in the loop and will
             # be added to a row in the appropriate dataframe.
             new_df_row = {column_names[0]: total_tweets[i],
                           column_names[1]: label,
-                          column_names[2]: values_list}
+                          column_names[2]: space_list}
 
             # Check which label it is. For all types, create a pro
             if label == labels[0]:
@@ -103,7 +113,6 @@ class Vader(ModelStrategy, Spacing):
                 pos_tweet_list.append(new_df_row) # Positive
             
             
-            # self.ApplySpacingOnScreen(3)
 
         
         # Create dataframes for each type of tweet (pos, neu, neg) to be held.
@@ -111,14 +120,19 @@ class Vader(ModelStrategy, Spacing):
         df_neu_tweets = pd.DataFrame(neu_tweet_list, columns=column_names)
         df_neg_tweets = pd.DataFrame(neg_tweet_list, columns=column_names)
 
-        st.write('### Dataframe of positive tweets: ')
+        self.ApplySpacingOnScreen(5)
+        st.write('### Description of the results: ')
+        st.write(self.m_results_message)
+        self.ApplySpacingOnScreen(3)
+
+        st.write('#### Dataframe of positive tweets: ')
         st.write(df_pos_tweets)
         self.ApplySpacingOnScreen(5)
 
-        st.write('### Dataframe of neutral tweets: ')
+        st.write('#### Dataframe of neutral tweets: ')
         st.write(df_neu_tweets)
         self.ApplySpacingOnScreen(5)
 
-        st.write('### Dataframe of negative tweets: ')
+        st.write('#### Dataframe of negative tweets: ')
         st.write(df_neg_tweets)
         self.ApplySpacingOnScreen(5)

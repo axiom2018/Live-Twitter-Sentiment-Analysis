@@ -16,6 +16,8 @@ clustering algorithms would be great.
 # next_class added for chain of responsibility pattern.
 class Clustering(Data):
     def __init__(self):
+        super().__init__()
+        
         self.m_details = ''' Since this project is an unsupervised machine learning problem, it'll be good to cluster similar 
         tweets together. Several clustering algorithms will be use such as the famous k means clustering algorithm. Also, example 
         or dummy tweets will be used in order to demonstrate the clustering since no tweets have been pulled yet. There will be 3 
@@ -166,6 +168,5 @@ class Clustering(Data):
 
         # When the page is going to be skipped, increment variable that controls which class is displayed to get to the proper next class.
         st.session_state.list_index += 1
-        print(f'Session state value in clustering.py: {st.session_state.list_index}')
 
         return False

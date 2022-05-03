@@ -1,3 +1,4 @@
+from tokenize import Name
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -63,9 +64,9 @@ class ScatterPlot:
         #     self.m_colors.append(self.GetLabelForTweets(self.m_two_tweets))
         # else:
 
-        self.m_colors.append(self.GetLabelForTweets(self.m_zero_tweets))
-        self.m_colors.append(self.GetLabelForTweets(self.m_one_tweets))
-        self.m_colors.append(self.GetLabelForTweets(self.m_two_tweets))
+        self.m_colors.append(self.GetLabelForTweets(self.m_zero_tweets, 'Zero'))
+        self.m_colors.append(self.GetLabelForTweets(self.m_one_tweets, 'One'))
+        self.m_colors.append(self.GetLabelForTweets(self.m_two_tweets, 'Two'))
 
     
         # Use the dataframe to get all points according to their labels.
@@ -185,8 +186,8 @@ class ScatterPlot:
         Let's say we gather ALL the tweets that the clustering algorithm has labeled as 0. How well do THOSE tweets match the positive, neutral, or 
         negative tweets? THAT'S the question that this function answers. Give it a set of tweets that were organized by the predictions/labels and let
         it figure out whether it matches the ORIGINAL positive, neutral, or negative sentiment tweets and return a color based on that. '''
-    def GetLabelForTweets(self, tweets_to_test):
-        # First get all the saved groups of tweets in session state.
+    def GetLabelForTweets(self, tweets_to_test, name):
+        # First get all the saved groups of tweets in session state. The following session_state variables are made in clustering.py
         pos_tweets = st.session_state.m_positive_tweets 
         neu_tweets = st.session_state.m_neutral_tweets 
         neg_tweets = st.session_state.m_negative_tweets 
@@ -224,6 +225,8 @@ class ScatterPlot:
         
         elif (neg_counter > pos_counter) and (neg_counter > neu_counter):
             selected_color = ('Negative', '#FF0000')
+
+        st.write(f'{name} has {pos_counter} positives, {neu_counter} neutrals, and {neg_counter} negatives. Assigned color: {selected_color[0]}')
 
         print(f'---Color selected: {selected_color[0]}---\n')
 
