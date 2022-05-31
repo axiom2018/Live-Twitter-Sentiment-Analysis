@@ -61,12 +61,12 @@ class FineTunedBertweet(ModelStrategy, Spacing):
 
 
     def LoadTokenizer(self):
-        self.m_tokenizer = AutoTokenizer.from_pretrained("rabindralamsal/finetuned-bertweet-sentiment-analysis")
+        self.m_tokenizer = AutoTokenizer.from_pretrained("rabindralamsal/BERTsent")
 
 
 
     def LoadModel(self):
-        self.m_model = TFAutoModelForSequenceClassification.from_pretrained("rabindralamsal/finetuned-bertweet-sentiment-analysis")
+        self.m_model = TFAutoModelForSequenceClassification.from_pretrained("rabindralamsal/BERTsent")
 
 
 
