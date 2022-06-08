@@ -87,7 +87,8 @@ class ScatterPlot:
         plt.scatter(one_x_points, one_y_points, color=self.m_colors[1][1], s=20, cmap='Spectral')
         plt.scatter(two_x_points, two_y_points, color=self.m_colors[2][1], s=20, cmap='Spectral')
 
-        st.plotly_chart(fig)
+        # st.plotly_chart(fig)
+        st.write(fig)
 
     
 
